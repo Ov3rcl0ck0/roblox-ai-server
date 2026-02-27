@@ -11,17 +11,19 @@ app.post("/ask", async (req, res) => {
     const userMessage = req.body.message;
 
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: userMessage }]
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENAI_KEY}`
-        }
-      }
-    );
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
+    model: "mistralai/mistral-7b-instruct:free",
+    messages: [{ role: "user", content: userMessage }]
+  },
+  {
+    headers: {
+      "Authorization": `Bearer ${process.env.OPENAI_KEY}`,
+      "HTTP-Referer": "https://yourgame.com",
+      "X-Title": "Roblox AI"
+    }
+  }
+);
 
     res.json({
       reply: response.data.choices[0].message.content
