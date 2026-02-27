@@ -28,7 +28,8 @@ app.post("/ask", async (req, res) => {
     });
 
   } catch (error) {
-    res.json({ reply: "Error talking to AI." });
+  console.log("FULL ERROR:", error.response?.data || error.message);
+  res.json({ reply: "SERVER ERROR - Check Render Logs" });
   }
 });
 
